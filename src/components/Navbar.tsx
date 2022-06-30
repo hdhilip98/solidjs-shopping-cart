@@ -20,9 +20,6 @@ const NavBar: Component<Props> = (props) => {
             <Anchor as={Link} href="/">
               Home
             </Anchor>
-            <Anchor as={Link} href="/store">
-              Store
-            </Anchor>
             <Anchor as={Link} href="/about">
               About
             </Anchor>

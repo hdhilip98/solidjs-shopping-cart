@@ -3,7 +3,6 @@ import { Container, Flex } from "@hope-ui/solid";
 
 import ShoppingCartProvider from "./context/ShoppingCartContext";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 import Store from "./pages/Store";
 import About from "./pages/About";
 import ShoppingCart from "./components/ShoppingCart";
@@ -18,8 +17,7 @@ const App = () => {
         <Navbar onShowCart={() => setShowCart(true)} />
         <Container px="$6">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/store" element={<Store />} />
+            <Route path="/" element={<Store />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </Container>
