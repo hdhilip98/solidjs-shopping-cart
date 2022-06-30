@@ -6,12 +6,16 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import About from "./pages/About";
+import ShoppingCart from "./components/ShoppingCart";
+import { createSignal } from "solid-js";
 
 const App = () => {
+  const [showCart, setShowCart] = createSignal(false);
+
   return (
     <ShoppingCartProvider>
       <Flex direction="column" gap="$4" backgroundColor="$neutral1" minH="100vh" pb="$4">
-        <Navbar />
+        <Navbar onShowCart={() => setShowCart(true)} />
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -19,6 +23,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
           </Routes>
         </Container>
+        <ShoppingCart opened={showCart} onClose={() => setShowCart(false)} />
       </Flex>
     </ShoppingCartProvider>
   );

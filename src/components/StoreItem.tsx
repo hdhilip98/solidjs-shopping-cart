@@ -1,5 +1,5 @@
 import { Component, Show } from "solid-js";
-import { Box, Button, ButtonGroup, Flex, IconButton, Image } from "@hope-ui/solid";
+import { Box, Button, ButtonGroup, Flex, IconButton, Image, Text } from "@hope-ui/solid";
 import { IoRemove, IoAdd } from "solid-icons/io";
 
 import formatCurrency from "../utilities/formatCurrency";
@@ -55,9 +55,9 @@ const StoreItem: Component<Props> = (props) => {
 
             <ButtonGroup size="sm" colorScheme="info" attached>
               <IconButton mr="-1px" icon={<IoRemove />} aria-label="remove" onClick={handleDecrement} />
-              <Button colorScheme="neutral" mr="-1px" variant="ghost">
-                {quantity().toString()}
-              </Button>
+              <Text px="1.5ch" alignSelf="center">
+                {quantity()}
+              </Text>
               <IconButton mr="-1px" icon={<IoAdd />} aria-label="add" onClick={handleIncrement} />
             </ButtonGroup>
           </Flex>

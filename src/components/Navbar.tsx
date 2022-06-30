@@ -1,10 +1,15 @@
+import { Component } from "solid-js";
 import { Anchor, Badge, Box, Container, Flex, IconButton } from "@hope-ui/solid";
 import { IoCart } from "solid-icons/io";
 import { Link } from "solid-app-router";
 
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
-const NavBar = () => {
+type Props = {
+  onShowCart: () => void;
+};
+
+const NavBar: Component<Props> = (props) => {
   const cart = useShoppingCart();
 
   return (
@@ -23,7 +28,7 @@ const NavBar = () => {
             </Anchor>
           </Flex>
           <Box position="relative">
-            <IconButton aria-label="Cart" icon={<IoCart />} colorScheme="info" compact />
+            <IconButton aria-label="Cart" icon={<IoCart />} colorScheme="info" compact onClick={props.onShowCart} />
             <Badge
               variant="solid"
               colorScheme="danger"
