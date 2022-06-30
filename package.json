@@ -1,15 +1,19 @@
 {
-  "name": "vite-template-solid",
+  "name": "solidjs-shopping-cart",
   "version": "0.0.0",
   "description": "",
+  "homepage": "http://hdhilip98.github.io/solidjs-shopping-cart",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "license": "MIT",
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
     "vite-plugin-solid": "^2.2.6"
