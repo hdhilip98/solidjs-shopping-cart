@@ -37,7 +37,7 @@ const NavBar: Component<Props> = (props) => {
               right="0"
               transform="translate(25%, -25%)"
             >
-              {cart.totalQuantity()}
+              {cart.totalQuantity}
             </Badge>
           </Box>
         </Flex>

@@ -24,9 +24,9 @@ const ShoppingCart: Component<Props> = (props) => {
   const cart = useShoppingCart();
 
   const totalPrice = () =>
-    cart.items().reduce((total, cartItem) => {
+    cart.items.reduce((total, cartItem) => {
       const item = storeItems.find((i) => i.id === cartItem.id);
-      return total + (item?.price || 0) * cartItem.quantity();
+      return total + (item?.price || 0) * cartItem.quantity;
     }, 0);
 
   return (
@@ -39,15 +39,15 @@ const ShoppingCart: Component<Props> = (props) => {
         <DrawerBody>
           <Flex direction="column" gap="$6">
             <Show
-              when={cart.items().length > 0}
+              when={cart.items.length > 0}
               fallback={
                 <Text as="cite" textAlign="center" fontSize="$lg" color="$neutral11">
                   No items in the cart
                 </Text>
               }
             >
-              <For each={cart.items()}>
-                {(item) => <CartItem id={item.id} quantity={item.quantity()} onRemove={() => item.remove()} />}
+              <For each={cart.items}>
+                {(item) => <CartItem id={item.id} quantity={item.quantity} onRemove={() => cart.remove(item.id)} />}
               </For>
               <Text textAlign="right" fontWeight="bold" fontSize="$xl">
                 Total: {formatCurrency(totalPrice())}

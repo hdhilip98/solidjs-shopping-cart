@@ -15,20 +15,8 @@ type Props = {
 const StoreItem: Component<Props> = (props) => {
   const cart = useShoppingCart();
 
-  const cartItem = () => cart.items().find((item) => item.id === props.id);
-  const quantity = () => cartItem()?.quantity() || 0;
-
-  const handleIncrement = () => {
-    cartItem()?.increment();
-  };
-
-  const handleDecrement = () => {
-    cartItem()?.decrement();
-  };
-
-  const handleRemove = () => {
-    cartItem()?.remove();
-  };
+  const cartItem = () => cart.items.find((item) => item.id === props.id);
+  const quantity = () => cartItem()?.quantity || 0;
 
   return (
     <Box borderWidth="1px" borderColor="$neutral6" borderRadius="$lg" overflow="hidden">
@@ -49,16 +37,16 @@ const StoreItem: Component<Props> = (props) => {
           }
         >
           <Flex justifyContent="space-between">
-            <Button size="sm" colorScheme="danger" variant="outline" onClick={handleRemove}>
+            <Button size="sm" colorScheme="danger" variant="outline" onClick={[cart.remove, props.id]}>
               Remove
             </Button>
 
             <ButtonGroup size="sm" colorScheme="info" attached>
-              <IconButton mr="-1px" icon={<IoRemove />} aria-label="remove" onClick={handleDecrement} />
+              <IconButton mr="-1px" icon={<IoRemove />} aria-label="remove" onClick={[cart.decrement, props.id]} />
               <Text px="1.5ch" alignSelf="center">
                 {quantity()}
               </Text>
-              <IconButton mr="-1px" icon={<IoAdd />} aria-label="add" onClick={handleIncrement} />
+              <IconButton mr="-1px" icon={<IoAdd />} aria-label="add" onClick={[cart.increment, props.id]} />
             </ButtonGroup>
           </Flex>
         </Show>
