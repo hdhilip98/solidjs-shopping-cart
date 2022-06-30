@@ -2,7 +2,11 @@ import { Anchor, Badge, Box, Container, Flex, IconButton } from "@hope-ui/solid"
 import { IoCart } from "solid-icons/io";
 import { Link } from "solid-app-router";
 
+import { useShoppingCart } from "../context/ShoppingCartContext";
+
 const NavBar = () => {
+  const cart = useShoppingCart();
+
   return (
     <Box py="$3" shadow="$sm" backgroundColor="white" position="sticky" top="0">
       <Container>
@@ -28,7 +32,7 @@ const NavBar = () => {
               right="0"
               transform="translate(25%, -25%)"
             >
-              4
+              {cart.totalQuantity()}
             </Badge>
           </Box>
         </Flex>

@@ -3,6 +3,7 @@ import { Box, Button, ButtonGroup, Flex, IconButton, Image } from "@hope-ui/soli
 import { IoRemove, IoAdd } from "solid-icons/io";
 
 import formatCurrency from "../utilities/formatCurrency";
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 type Props = {
   id: number;
@@ -12,7 +13,22 @@ type Props = {
 };
 
 const StoreItem: Component<Props> = (props) => {
-  const quantity = 0;
+  const cart = useShoppingCart();
+
+  const cartItem = () => cart.items().find((item) => item.id === props.id);
+  const quantity = () => cartItem()?.quantity() || 0;
+
+  const handleIncrement = () => {
+    cartItem()?.increment();
+  };
+
+  const handleDecrement = () => {
+    cartItem()?.decrement();
+  };
+
+  const handleRemove = () => {
+    cartItem()?.remove();
+  };
 
   return (
     <Box borderWidth="1px" borderColor="$neutral6" borderRadius="$lg" overflow="hidden">
@@ -25,24 +41,24 @@ const StoreItem: Component<Props> = (props) => {
           </Box>
         </Flex>
         <Show
-          when={quantity !== 0}
+          when={quantity() > 0}
           fallback={
-            <Button size="sm" colorScheme="info">
+            <Button size="sm" colorScheme="info" onClick={() => cart.addToCart(props.id)}>
               Add to Cart
             </Button>
           }
         >
           <Flex justifyContent="space-between">
-            <Button size="sm" colorScheme="danger" variant="outline">
+            <Button size="sm" colorScheme="danger" variant="outline" onClick={handleRemove}>
               Remove
             </Button>
 
             <ButtonGroup size="sm" colorScheme="info" attached>
-              <IconButton mr="-1px" icon={<IoRemove />} aria-label="remove" />
+              <IconButton mr="-1px" icon={<IoRemove />} aria-label="remove" onClick={handleDecrement} />
               <Button colorScheme="neutral" mr="-1px" variant="ghost">
-                {quantity.toString()}
+                {quantity().toString()}
               </Button>
-              <IconButton mr="-1px" icon={<IoAdd />} aria-label="add" />
+              <IconButton mr="-1px" icon={<IoAdd />} aria-label="add" onClick={handleIncrement} />
             </ButtonGroup>
           </Flex>
         </Show>
