@@ -16,7 +16,7 @@ const App = () => {
     <ShoppingCartProvider>
       <Flex direction="column" gap="$4" backgroundColor="$neutral1" minH="100vh" pb="$4">
         <Navbar onShowCart={() => setShowCart(true)} />
-        <Container>
+        <Container px="$6">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/store" element={<Store />} />

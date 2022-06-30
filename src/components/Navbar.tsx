@@ -14,7 +14,7 @@ const NavBar: Component<Props> = (props) => {
 
   return (
     <Box py="$3" shadow="$sm" backgroundColor="white" position="sticky" top="0">
-      <Container>
+      <Container px="$6">
         <Flex justifyContent="space-between" alignItems="center">
           <Flex gap="$5">
             <Anchor as={Link} href="/">
